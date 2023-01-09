@@ -10,7 +10,7 @@ export const Nav = styled.nav`
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
-  max-width: 1342px;
+  max-width: 1500px;
   padding: 16px 32px;
 
   @media (max-width: 1000px) {

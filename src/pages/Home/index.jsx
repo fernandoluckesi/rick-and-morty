@@ -5,6 +5,7 @@ import {
   ContentContainer,
   ResumeContainer,
   CardListContainer,
+  CardList,
 } from './styles';
 import { getCharacters } from '../../services/apis';
 import { CharacterCard } from '../../components/CharacterCard';
@@ -45,19 +46,22 @@ export function Home() {
           </ResumeContainer>
           <CardListContainer>
             <h2>Characters</h2>
-            {characters.length > 0 &&
-              characters.map((character) => {
-                return (
-                  <CharacterCard
-                    avatar={character.image}
-                    name={character.name}
-                    status={character.status}
-                    species={character.species}
-                    lastKnownLocation={character.species}
-                    firstSeenIn={character.species}
-                  />
-                );
-              })}
+            <CardList>
+              {characters.length > 0 &&
+                characters.map((character) => {
+                  return (
+                    <CharacterCard
+                      key={character.name}
+                      avatar={character.image}
+                      name={character.name}
+                      status={character.status}
+                      species={character.species}
+                      lastKnownLocation={character.location.name}
+                      firstSeenIn={character.episode[0]}
+                    />
+                  );
+                })}
+            </CardList>
           </CardListContainer>
         </ContentContainer>
       </>

@@ -18,7 +18,7 @@ export const Banner = styled.div`
     margin: 0 auto;
     max-width: 655px;
     text-align: center;
-    text-shadow: 4px 4px 15px #ffff;
+    text-shadow: 4px 4px 15px var(--text-light);
   }
 `;
 
@@ -47,5 +47,13 @@ export const CardListContainer = styled.div`
   margin-top: 64px;
   h2 {
     color: var(--text-light);
+    margin-bottom: 3rem;
   }
+`;
+
+export const CardList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem;
 `;

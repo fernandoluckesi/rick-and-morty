@@ -10,10 +10,13 @@ import {
 import RickAndMortyLogo from '../../assets/images/rick-and-morty-logo.png';
 import CloseIcon from '../../assets/images/close-icon.png';
 import MenuIcon from '../../assets/images/menu-icon.png';
+import { useMedia } from 'react-use';
 
 export function Header() {
-  const [drawerTransition, setDrawerTransition] = useState(true);
-  const [isOpenDrawer, setIsOpenDrawer] = useState(true);
+  const [drawerTransition, setDrawerTransition] = useState(false);
+  const [isOpenDrawer, setIsOpenDrawer] = useState(false);
+
+  const isMobile = useMedia('(max-width: 1000px');
 
   const handleCloseDrawer = useCallback(() => {
     setDrawerTransition(false);
@@ -36,7 +39,7 @@ export function Header() {
     <MainContainer>
       <Nav>
         <Logo src={RickAndMortyLogo} />
-        {isOpenDrawer && (
+        {(isOpenDrawer || !isMobile) && (
           <Links $drawerTransition={drawerTransition}>
             <CloseBtn src={CloseIcon} onClick={handleCloseDrawer} />
             <li>

@@ -10,3 +10,14 @@ export const getCharacters = () => {
       return error;
     });
 };
+
+export const getEpisodeByUrl = (url) => {
+  return axios
+    .get(url)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return error;
+    });
+};

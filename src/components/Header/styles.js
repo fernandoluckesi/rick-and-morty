@@ -1,7 +1,7 @@
 import styled, { keyframes } from 'styled-components';
 
 export const MainContainer = styled.div`
-  background-color: white;
+  background-color: var(--background-light);
   width: 100%;
 `;
 
@@ -40,18 +40,18 @@ export const Links = styled.ul`
   }
 
   a {
-    color: #20232a;
+    color: var(--text-dark);
     font-weight: 600;
     text-decoration: none;
     transition: color 0.2s;
     &:hover {
       cursor: pointer;
-      color: #add9f4;
+      color: var(--blue);
     }
   }
 
   @media (max-width: 1000px) {
-    background-color: white;
+    background-color: var(--background-light);
     bottom: 0;
     border-radius: 30px 30px 0 0;
     flex-direction: column;

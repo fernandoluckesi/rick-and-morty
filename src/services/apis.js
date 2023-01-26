@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-export const getCharacters = () => {
+export const getAllItemsByCategory = (category) => {
   return axios
-    .get('https://rickandmortyapi.com/api/character')
+    .get(`https://rickandmortyapi.com/api/${category}`)
     .then((response) => {
       return response.data.results;
     })
@@ -11,7 +11,7 @@ export const getCharacters = () => {
     });
 };
 
-export const getEpisodeByUrl = (url) => {
+export const getByUrl = (url) => {
   return axios
     .get(url)
     .then((response) => {

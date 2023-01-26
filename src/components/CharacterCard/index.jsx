@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { getEpisodeByUrl } from '../../services/apis';
+import { Link } from 'react-router-dom';
+import { getByUrl } from '../../services/apis';
+import { useMedia } from 'react-use';
+import PropTypes from 'prop-types';
+
 import {
   MainContainer,
   Avatar,
@@ -12,47 +16,80 @@ import {
 
 export function CharacterCard({
   avatar,
+  id,
   name,
   status,
   species,
-  lastKnownLocation,
-  firstSeenIn,
+  lastKnownLocationUrl,
+  firstSeenInUrl,
 }) {
-  const [episodeName, setEpisodeName] = useState('');
+  const [episode, setEpisode] = useState({});
+  const [location, setLocation] = useState({});
 
-  const getEpisodeName = () => {
-    getEpisodeByUrl(firstSeenIn)
+  const isNotMobile = useMedia('(min-width: 1001px)');
+
+  const getEpisode = () => {
+    getByUrl(firstSeenInUrl)
       .then((result) => {
-        setEpisodeName(result.name);
+        setEpisode(result);
       })
       .catch(() => {
-        setEpisodeName('Not found');
+        setEpisode('Not found');
       });
   };
 
+  const getLocation = () => {
+    getByUrl(lastKnownLocationUrl)
+      .then((result) => {
+        setLocation(result);
+      })
+      .catch(() => {
+        setLocation('Not found');
+      });
+  };
+
+  const handleCharacterDetailsRedirect = () => {
+    window.location.href = `/character/${id}`;
+  };
+
   useEffect(() => {
-    getEpisodeName();
+    getEpisode();
+    getLocation();
   }, []);
 
   return (
     <MainContainer>
-      <Avatar>
+      <Avatar onClick={handleCharacterDetailsRedirect}>
         <img src={avatar} alt={name} />
       </Avatar>
       <CharacterInfo>
-        <Name>{name}</Name>
+        <Name to={`character/${id}`}>{name}</Name>
         <StatusAndSpecies status={status}>
           <span /> {status} - {species}{' '}
         </StatusAndSpecies>
-        <LastKnownLocation>
-          <p>Last known location:</p>
-          <p>{lastKnownLocation}</p>
-        </LastKnownLocation>
-        <FirstSeenIn>
-          <p>First seen in:</p>
-          <p>{episodeName}</p>
-        </FirstSeenIn>
+        {isNotMobile && (
+          <>
+            <LastKnownLocation>
+              <p>Last known location:</p>
+              <Link to={`location/${location.id}`}>{location.name}</Link>
+            </LastKnownLocation>
+            <FirstSeenIn>
+              <p>First seen in:</p>
+              <Link to={`episode/${episode.id}`}>{episode.name}</Link>
+            </FirstSeenIn>
+          </>
+        )}
       </CharacterInfo>
     </MainContainer>
   );
 }
+
+CharacterCard.propTypes = {
+  avatar: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  status: PropTypes.string.isRequired,
+  species: PropTypes.string.isRequired,
+  lastKnownLocationUrl: PropTypes.string.isRequired,
+  firstSeenInUrl: PropTypes.string.isRequired,
+};

@@ -6,17 +6,44 @@ import {
   ResumeContainer,
   CardListContainer,
   CardList,
+  ViewMoreBtn,
 } from './styles';
-import { getCharacters } from '../../services/apis';
+import { getAllItemsByCategory } from '../../services/apis';
 import { CharacterCard } from '../../components/CharacterCard';
+import { EpisodeCard } from '../../components/EpisodeCard';
+import { LocationCard } from '../../components/LocationCard';
 
 export function Home() {
   const [characters, setCharacters] = useState([]);
+  const [locations, setLocations] = useState([]);
+  const [episodes, setEpisodes] = useState([]);
+
+  const handleRedirectPageAllItems = (category) => {
+    window.location.href = `/${category}`;
+  };
 
   useEffect(() => {
-    getCharacters().then((characters) => {
-      setCharacters(characters.slice(0, 6));
-    });
+    getAllItemsByCategory('character')
+      .then((characters) => {
+        setCharacters(characters.slice(0, 6));
+      })
+      .catch(() => {
+        setCharacters([]);
+      });
+    getAllItemsByCategory('episode')
+      .then((episodes) => {
+        setEpisodes(episodes.slice(0, 6));
+      })
+      .catch(() => {
+        setEpisodes([]);
+      });
+    getAllItemsByCategory('location')
+      .then((locations) => {
+        setLocations(locations.slice(0, 6));
+      })
+      .catch(() => {
+        setLocations([]);
+      });
   }, []);
   return (
     <MainTemplate>
@@ -51,17 +78,67 @@ export function Home() {
                 characters.map((character) => {
                   return (
                     <CharacterCard
-                      key={character.name}
+                      key={character.id}
                       avatar={character.image}
+                      id={character.id}
                       name={character.name}
                       status={character.status}
                       species={character.species}
-                      lastKnownLocation={character.location.name}
-                      firstSeenIn={character.episode[0]}
+                      lastKnownLocationUrl={character.location.url}
+                      firstSeenInUrl={character.episode[0]}
                     />
                   );
                 })}
             </CardList>
+            <ViewMoreBtn
+              onClick={() => handleRedirectPageAllItems('characters')}
+            >
+              VIEW MORE CHARACTERS
+            </ViewMoreBtn>
+          </CardListContainer>
+          <CardListContainer>
+            <h2>Episodes</h2>
+            <CardList>
+              {episodes.length > 0 &&
+                episodes.map((episode) => {
+                  return (
+                    <EpisodeCard
+                      key={episode.id}
+                      id={episode.id}
+                      name={episode.name}
+                      airDate={episode.air_date}
+                      episode={episode.episode}
+                      charactersUrls={episode.characters}
+                    />
+                  );
+                })}
+            </CardList>
+            <ViewMoreBtn onClick={() => handleRedirectPageAllItems('episodes')}>
+              VIEW MORE EPISODES
+            </ViewMoreBtn>
+          </CardListContainer>
+          <CardListContainer>
+            <h2>Locations</h2>
+            <CardList>
+              {locations.length > 0 &&
+                locations.map((location) => {
+                  return (
+                    <LocationCard
+                      key={location.id}
+                      id={location.id}
+                      name={location.name}
+                      type={location.type}
+                      dimension={location.dimension}
+                      residentsUrls={location.residents}
+                    />
+                  );
+                })}
+            </CardList>
+            <ViewMoreBtn
+              onClick={() => handleRedirectPageAllItems('locations')}
+            >
+              VIEW MORE LOCATIONS
+            </ViewMoreBtn>
           </CardListContainer>
         </ContentContainer>
       </>

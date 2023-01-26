@@ -16,7 +16,7 @@ export function Header() {
   const [drawerTransition, setDrawerTransition] = useState(false);
   const [isOpenDrawer, setIsOpenDrawer] = useState(false);
 
-  const isMobile = useMedia('(max-width: 1000px');
+  const isMobile = useMedia('(max-width: 1000px)');
 
   const handleCloseDrawer = useCallback(() => {
     setDrawerTransition(false);

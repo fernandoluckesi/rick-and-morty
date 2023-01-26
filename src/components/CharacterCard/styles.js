@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const MainContainer = styled.div`
@@ -5,6 +6,7 @@ export const MainContainer = styled.div`
   background-color: var(--shape);
   border-radius: 10px;
   display: flex;
+  padding-right: 1rem;
   width: calc(100% / 2 - 16px);
 
   @media (max-width: 1000px) {
@@ -13,11 +15,30 @@ export const MainContainer = styled.div`
 `;
 
 export const Avatar = styled.div`
+  &:hover {
+    cursor: pointer;
+  }
   height: 210px;
   img {
     border-radius: 10px 0 0 10px;
     height: 210px;
     width: 210px;
+  }
+
+  @media (max-width: 1000px) {
+    height: 150px;
+    img {
+      height: 150px;
+      width: 150px;
+    }
+  }
+
+  @media (max-width: 700px) {
+    height: 100px;
+    img {
+      height: 100px;
+      width: 100px;
+    }
   }
 `;
 
@@ -25,11 +46,18 @@ export const CharacterInfo = styled.div`
   margin-left: 2rem;
 `;
 
-export const Name = styled.h3`
+export const Name = styled(Link)`
   color: var(--text-light);
+  display: block;
   font-size: 1.5rem;
   font-weight: var(--fontWeightSemiBold);
   margin-bottom: 0.5rem;
+  text-decoration: none;
+  transition: color 0.2s;
+  &:hover {
+    cursor: pointer;
+    color: var(--blue);
+  }
 `;
 
 export const StatusAndSpecies = styled.p`
@@ -55,30 +83,36 @@ export const LastKnownLocation = styled.div`
   margin-bottom: 16px;
 
   p {
-  }
-
-  p:nth-child(1) {
     color: var(--text-gray);
     margin-bottom: 4px;
   }
 
-  p:nth-child(2) {
+  a {
     color: var(--text-light);
     font-weight: var(--fontWeightMedium);
+    text-decoration: none;
+    transition: color 0.2s;
+    &:hover {
+      cursor: pointer;
+      color: var(--blue);
+    }
   }
 `;
 
 export const FirstSeenIn = styled.div`
   p {
-  }
-
-  p:nth-child(1) {
     color: var(--text-gray);
     margin-bottom: 4px;
   }
 
-  p:nth-child(2) {
+  a {
     color: var(--text-light);
     font-weight: var(--fontWeightMedium);
+    text-decoration: none;
+    transition: color 0.2s;
+    &:hover {
+      cursor: pointer;
+      color: var(--blue);
+    }
   }
 `;

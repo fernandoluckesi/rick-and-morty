@@ -12,8 +12,11 @@ export const GlobalStyle = createGlobalStyle`
     --text-light: #FFFFFF;
     --text-gray: #9E9E9E;
 
-    --fontWeightSemiBold: 600;
+    --fontWeightRegular: 400;
     --fontWeightMedium: 500;
+    --fontWeightSemiBold: 600;
+    --fontWeightBold: 700;
+
   }
 
   * {

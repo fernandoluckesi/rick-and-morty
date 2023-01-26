@@ -1,12 +1,14 @@
-import React from "react";
-import { Header } from "../../components/Header";
-import { MainContainer } from "./styles";
+import React from 'react';
+import { Footer } from '../../components/Footer';
+import { Header } from '../../components/Header';
+import { Content, MainContainer } from './styles';
 
 export function MainTemplate({ children }) {
   return (
     <MainContainer>
       <Header />
-      {children}
+      <Content>{children}</Content>
+      <Footer />
     </MainContainer>
   );
 }

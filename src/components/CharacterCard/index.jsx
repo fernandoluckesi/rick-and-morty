@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getByUrl } from '../../services/apis';
 import { useMedia } from 'react-use';
 import PropTypes from 'prop-types';
 
@@ -12,7 +11,10 @@ import {
   StatusAndSpecies,
   LastKnownLocation,
   FirstSeenIn,
+  StatusPoint,
 } from './styles';
+import { useEpisode } from '../../hooks/useEpisode';
+import { useLocation } from '../../hooks/useLocation';
 
 export function CharacterCard({
   avatar,
@@ -23,39 +25,15 @@ export function CharacterCard({
   lastKnownLocationUrl,
   firstSeenInUrl,
 }) {
-  const [episode, setEpisode] = useState({});
-  const [location, setLocation] = useState({});
+  const { name: episodeName, id: episodeId } = useEpisode(firstSeenInUrl);
+  const { name: locationName, id: locationId } =
+    useLocation(lastKnownLocationUrl);
 
   const isNotMobile = useMedia('(min-width: 1001px)');
-
-  const getEpisode = () => {
-    getByUrl(firstSeenInUrl)
-      .then((result) => {
-        setEpisode(result);
-      })
-      .catch(() => {
-        setEpisode('Not found');
-      });
-  };
-
-  const getLocation = () => {
-    getByUrl(lastKnownLocationUrl)
-      .then((result) => {
-        setLocation(result);
-      })
-      .catch(() => {
-        setLocation('Not found');
-      });
-  };
 
   const handleCharacterDetailsRedirect = () => {
     window.location.href = `/character/${id}`;
   };
-
-  useEffect(() => {
-    getEpisode();
-    getLocation();
-  }, []);
 
   return (
     <MainContainer>
@@ -64,18 +42,20 @@ export function CharacterCard({
       </Avatar>
       <CharacterInfo>
         <Name to={`character/${id}`}>{name}</Name>
-        <StatusAndSpecies status={status}>
-          <span /> {status} - {species}{' '}
+        <StatusAndSpecies>
+          <StatusPoint status={status} /> {status} - {species}{' '}
         </StatusAndSpecies>
         {isNotMobile && (
           <>
             <LastKnownLocation>
               <p>Last known location:</p>
-              <Link to={`location/${location.id}`}>{location.name}</Link>
+              {(locationName && (
+                <Link to={`location/${locationId}`}>{locationName}</Link>
+              )) || <a>unknown</a>}
             </LastKnownLocation>
             <FirstSeenIn>
               <p>First seen in:</p>
-              <Link to={`episode/${episode.id}`}>{episode.name}</Link>
+              <Link to={`episode/${episodeId}`}>{episodeName}</Link>
             </FirstSeenIn>
           </>
         )}

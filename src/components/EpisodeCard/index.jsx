@@ -22,7 +22,7 @@ export function EpisodeCard({ id, name, airDate, episode, charactersUrls }) {
   };
 
   const handleEpisodeDetailsRedirect = () => {
-    window.location.href = `/character/${id}`;
+    window.location.href = `/episode/${id}`;
   };
 
   useEffect(() => {

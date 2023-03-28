@@ -8,43 +8,21 @@ import {
   CardList,
   ViewMoreBtn,
 } from './styles';
-import { getAllItemsByCategory } from '../../services/apis';
+
 import { CharacterCard } from '../../components/CharacterCard';
 import { EpisodeCard } from '../../components/EpisodeCard';
 import { LocationCard } from '../../components/LocationCard';
+import { useItems } from '../../hooks/useItems';
 
 export function Home() {
-  const [characters, setCharacters] = useState([]);
-  const [locations, setLocations] = useState([]);
-  const [episodes, setEpisodes] = useState([]);
+  const characters = useItems('character');
+  const locations = useItems('location');
+  const episodes = useItems('episode');
 
   const handleRedirectPageAllItems = (category) => {
     window.location.href = `/${category}`;
   };
 
-  useEffect(() => {
-    getAllItemsByCategory('character')
-      .then((characters) => {
-        setCharacters(characters.slice(0, 6));
-      })
-      .catch(() => {
-        setCharacters([]);
-      });
-    getAllItemsByCategory('episode')
-      .then((episodes) => {
-        setEpisodes(episodes.slice(0, 6));
-      })
-      .catch(() => {
-        setEpisodes([]);
-      });
-    getAllItemsByCategory('location')
-      .then((locations) => {
-        setLocations(locations.slice(0, 6));
-      })
-      .catch(() => {
-        setLocations([]);
-      });
-  }, []);
   return (
     <MainTemplate>
       <>

@@ -60,6 +60,7 @@ export const Links = styled.ul`
     padding: 82px 0;
     position: fixed;
     transition: transform 0.3s;
+    z-index: 1;
     width: 100vw;
 
     animation: ${modalMobileOpen} 0.6s;

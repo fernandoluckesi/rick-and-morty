@@ -11,6 +11,7 @@ import RickAndMortyLogo from '../../assets/images/rick-and-morty-logo.png';
 import CloseIcon from '../../assets/images/close-icon.png';
 import MenuIcon from '../../assets/images/menu-icon.png';
 import { useMedia } from 'react-use';
+import { Link } from 'react-router-dom';
 
 export function Header() {
   const [drawerTransition, setDrawerTransition] = useState(false);
@@ -38,7 +39,9 @@ export function Header() {
   return (
     <MainContainer>
       <Nav>
-        <Logo src={RickAndMortyLogo} />
+        <Link to={'/'}>
+          <Logo src={RickAndMortyLogo} />
+        </Link>
         {(isOpenDrawer || !isMobile) && (
           <Links $drawerTransition={drawerTransition}>
             <CloseBtn src={CloseIcon} onClick={handleCloseDrawer} />

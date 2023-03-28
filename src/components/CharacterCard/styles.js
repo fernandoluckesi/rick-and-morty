@@ -65,18 +65,19 @@ export const StatusAndSpecies = styled.p`
   color: var(--text-light);
   display: flex;
   margin-bottom: 1rem;
+`;
 
-  span {
-    ${({ status }) => status === 'Alive' && `background-color: var(--green);`};
-    ${({ status }) => status === 'Dead' && `background-color: var(--red);`};
-    ${({ status }) =>
-      status === 'Unknown' && `background-color: var(--text-gray);`};
-    border-radius: 50%;
-    display: block;
-    height: 0.5rem;
-    margin-right: 0.5rem;
-    width: 0.5rem;
-  }
+export const StatusPoint = styled.span`
+  ${({ status }) => status === 'Alive' && `background-color: var(--green);`};
+  ${({ status }) => status === 'Dead' && `background-color: var(--red);`};
+  ${({ status }) =>
+    status === ('unknown' || 'Unknown') &&
+    `background-color: var(--text-gray);`};
+  border-radius: 50%;
+  display: block;
+  height: 0.5rem;
+  margin-right: 0.5rem;
+  width: 0.5rem;
 `;
 
 export const LastKnownLocation = styled.div`

@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { getByUrl } from '../services/apis';
 
-export function useCharacter(url) {
+export function useCharacter(id) {
   const [character, setCharacter] = useState({});
   const [episodes, setEpisodes] = useState([]);
 
   useEffect(() => {
-    getByUrl(url)
+    getByUrl(`https://rickandmortyapi.com/api/character/${id}`)
       .then((data) => {
         setCharacter(data);
         const episodesArray = data.episode;
@@ -14,7 +14,11 @@ export function useCharacter(url) {
           getByUrl(episodeUrl).then((episodeData) => {
             setEpisodes((oldState) => [
               ...oldState,
-              { name: episodeData.name, url: episodeData.url },
+              {
+                id: episodeData.id,
+                name: episodeData.name,
+                url: episodeData.url,
+              },
             ]);
           });
         });

@@ -1,10 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { getByUrl, getItemById } from '../../services/apis';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
-import { useEpisode } from '../../hooks/useEpisode';
-import { useLocation } from '../../hooks/useLocation';
 
 import {
   Avatar,
@@ -18,11 +14,9 @@ import {
 } from './styles';
 import { useCharacter } from '../../hooks/useCharacter';
 
-export function CharacterDetails({ category, id }) {
-  const [itemData, setItemData] = useState({});
-
+export function CharacterDetails({ id }) {
   const { episodes, image, location, origin, species, status, name } =
-    useCharacter(`https://rickandmortyapi.com/api/${category}/${id}`);
+    useCharacter(id);
 
   return (
     <MainContainer>
@@ -34,15 +28,30 @@ export function CharacterDetails({ category, id }) {
       </StatusAndSpecies>
       <Info>
         <p className="info-subtitle">Origin:</p>
-        <p className="info-data">{origin?.name}</p>
+        <Link
+          className="info-data"
+          to={`/location/${origin?.url.replace(/\D/g, '')}`}
+        >
+          {origin?.name}
+        </Link>
       </Info>
       <Info>
         <p className="info-subtitle"> Last known location:</p>
-        <p className="info-data">{location?.name}</p>
+        <Link
+          className="info-data"
+          to={`/location/${origin?.url.replace(/\D/g, '')}`}
+        >
+          {location?.name}
+        </Link>
       </Info>
       <Info>
         <p className="info-subtitle">First seen in:</p>
-        <p className="info-data">{episodes[0]?.name}</p>
+        <Link
+          className="info-data"
+          to={`/episode/${episodes[0]?.url.replace(/\D/g, '')}`}
+        >
+          {episodes[0]?.name}
+        </Link>
       </Info>
       <EpisodesThatParticipates>
         <h3 className="episodes-that-participates-title">
@@ -54,8 +63,8 @@ export function CharacterDetails({ category, id }) {
               <li className="episodes-that-participates-item">
                 <Link
                   className="episodes-that-participates-link"
-                  to={`episode/${episode.url.replace(/\D/g, '')}`}
-                  key={episode.name}
+                  to={`/episode/${episode.url.replace(/\D/g, '')}`}
+                  key={episode.id}
                 >
                   {episode.name}
                 </Link>
@@ -67,3 +76,7 @@ export function CharacterDetails({ category, id }) {
     </MainContainer>
   );
 }
+
+CharacterDetails.propTypes = {
+  id: PropTypes.string.isRequired,
+};

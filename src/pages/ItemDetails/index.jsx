@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { CharacterDetails } from '../../components/CharacterDetails';
 import { MainTemplate } from '../../templates/MainTemplate';
 import { MainContainer } from './styles';
+import { EpisodeDetails } from '../../components/EpisodeDetails';
 
 export function ItemDetails() {
   const { category, id } = useParams();
@@ -11,9 +11,8 @@ export function ItemDetails() {
   return (
     <MainTemplate>
       <MainContainer>
-        {category === 'character' && (
-          <CharacterDetails category={category} id={id} />
-        )}
+        {category === 'character' && <CharacterDetails id={id} />}
+        {category === 'episode' && <EpisodeDetails id={id} />}
       </MainContainer>
     </MainTemplate>
   );

@@ -26,20 +26,22 @@ export function CharacterDetails({ id }) {
       <StatusAndSpecies>
         <StatusPoint status={status} /> {status} - {species}
       </StatusAndSpecies>
-      <Info>
+      <Info infoData={origin?.name}>
         <p className="info-subtitle">Origin:</p>
         <Link
           className="info-data"
-          to={`/location/${origin?.url.replace(/\D/g, '')}`}
+          to={origin?.url ? `/location/${origin?.url.replace(/\D/g, '')}` : ''}
         >
           {origin?.name}
         </Link>
       </Info>
-      <Info>
+      <Info infoData={location?.name}>
         <p className="info-subtitle"> Last known location:</p>
         <Link
           className="info-data"
-          to={`/location/${origin?.url.replace(/\D/g, '')}`}
+          to={
+            location?.url ? `/location/${location?.url.replace(/\D/g, '')}` : ''
+          }
         >
           {location?.name}
         </Link>

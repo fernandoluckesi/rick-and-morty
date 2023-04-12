@@ -1,13 +1,27 @@
 import { useState, useEffect } from 'react';
 import { getByUrl } from '../services/apis';
 
-export function useLocation(url) {
+export function useLocation(id) {
   const [location, setLocation] = useState({});
+  const [residents, setResidents] = useState([]);
 
   useEffect(() => {
-    getByUrl(url)
+    getByUrl(`https://rickandmortyapi.com/api/location/${id}`)
       .then((data) => {
         setLocation(data);
+        const residentsArray = data.residents;
+        residentsArray.forEach((residentUrl) => {
+          getByUrl(residentUrl).then((residentData) => {
+            setResidents((oldState) => [
+              ...oldState,
+              {
+                id: residentData,
+                name: residentData.name,
+                url: residentData.url,
+              },
+            ]);
+          });
+        });
       })
       .catch(() => {
         setLocation(false);
@@ -20,7 +34,7 @@ export function useLocation(url) {
       name: location.name,
       type: location.type,
       dimension: location.dimension,
-      residents: location.residents,
+      residents: residents,
       url: location.url,
       created: location.created,
     };

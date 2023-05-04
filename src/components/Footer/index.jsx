@@ -12,7 +12,7 @@ export function Footer() {
           <img src={linkedinIcon} alt="linkedin icon" />
         </Icons>
         <Signature>
-          <span>&lt;/&gt;</span> by <span>Fernando Luckesi</span> 2022
+          <span>&lt;/&gt;</span> by <span>Fernando Luckesi</span> 2023
         </Signature>
       </div>
     </MainContainer>

@@ -25,9 +25,11 @@ export function CharacterCard({
   lastKnownLocationUrl,
   firstSeenInUrl,
 }) {
-  const { name: episodeName, id: episodeId } = useEpisode(firstSeenInUrl);
-  const { name: locationName, id: locationId } =
-    useLocation(lastKnownLocationUrl);
+  const episodeId = firstSeenInUrl.replace(/\D/g, '');
+  const { name: episodeName } = useEpisode(episodeId);
+
+  const locationId = lastKnownLocationUrl.replace(/\D/g, '');
+  const { name: locationName } = useLocation(locationId);
 
   const isNotMobile = useMedia('(min-width: 1001px)');
 
@@ -41,7 +43,7 @@ export function CharacterCard({
         <img src={avatar} alt={name} />
       </Avatar>
       <CharacterInfo>
-        <Name to={`character/${id}`}>{name}</Name>
+        <Name to={`/character/${id}`}>{name}</Name>
         <StatusAndSpecies>
           <StatusPoint status={status} /> {status} - {species}{' '}
         </StatusAndSpecies>
@@ -50,12 +52,12 @@ export function CharacterCard({
             <LastKnownLocation>
               <p>Last known location:</p>
               {(locationName && (
-                <Link to={`location/${locationId}`}>{locationName}</Link>
+                <Link to={`/location/${locationId}`}>{locationName}</Link>
               )) || <a>unknown</a>}
             </LastKnownLocation>
             <FirstSeenIn>
               <p>First seen in:</p>
-              <Link to={`episode/${episodeId}`}>{episodeName}</Link>
+              <Link to={`/episode/${episodeId}`}>{episodeName}</Link>
             </FirstSeenIn>
           </>
         )}

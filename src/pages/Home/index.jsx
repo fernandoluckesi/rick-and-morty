@@ -13,6 +13,7 @@ import { CharacterCard } from '../../components/CharacterCard';
 import { EpisodeCard } from '../../components/EpisodeCard';
 import { LocationCard } from '../../components/LocationCard';
 import { useItems } from '../../hooks/useItems';
+import { GridCardList } from '../../components/GridCardList';
 
 export function Home() {
   const characters = useItems('character');
@@ -51,7 +52,7 @@ export function Home() {
           </ResumeContainer>
           <CardListContainer>
             <h2>Characters</h2>
-            <CardList>
+            <GridCardList>
               {characters.length > 0 &&
                 characters.map((character) => {
                   return (
@@ -67,7 +68,7 @@ export function Home() {
                     />
                   );
                 })}
-            </CardList>
+            </GridCardList>
             <ViewMoreBtn
               onClick={() => handleRedirectPageAllItems('characters')}
             >
@@ -76,7 +77,7 @@ export function Home() {
           </CardListContainer>
           <CardListContainer>
             <h2>Episodes</h2>
-            <CardList>
+            <GridCardList>
               {episodes.length > 0 &&
                 episodes.map((episode) => {
                   return (
@@ -90,14 +91,14 @@ export function Home() {
                     />
                   );
                 })}
-            </CardList>
+            </GridCardList>
             <ViewMoreBtn onClick={() => handleRedirectPageAllItems('episodes')}>
               VIEW MORE EPISODES
             </ViewMoreBtn>
           </CardListContainer>
           <CardListContainer>
             <h2>Locations</h2>
-            <CardList>
+            <GridCardList>
               {locations.length > 0 &&
                 locations.map((location) => {
                   return (
@@ -111,7 +112,7 @@ export function Home() {
                     />
                   );
                 })}
-            </CardList>
+            </GridCardList>
             <ViewMoreBtn
               onClick={() => handleRedirectPageAllItems('locations')}
             >

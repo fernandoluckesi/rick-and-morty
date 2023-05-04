@@ -32,3 +32,16 @@ export const getItemById = (category, id) => {
       return error;
     });
 };
+
+export const getCharactersList = (page, name, status) => {
+  return axios
+    .get(
+      `https://rickandmortyapi.com/api/character/?page=${page}&name=${name}&status=${status}`
+    )
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return error;
+    });
+};

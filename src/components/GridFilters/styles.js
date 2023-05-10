@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 
 export const MainContainer = styled.div`
-  padding: 4rem 2rem;
-
-  @media (max-width: 1000px) {
-    padding: 2rem 1rem;
-  }
+  align-items: flex-end;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px 64px;
 `;

@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { MainTemplate } from '../../templates/MainTemplate';
 import {
   Banner,
   ContentContainer,
   ResumeContainer,
   CardListContainer,
-  CardList,
   ViewMoreBtn,
 } from './styles';
 

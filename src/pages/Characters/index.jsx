@@ -9,16 +9,28 @@ import { MainTemplate } from '../../templates/MainTemplate';
 import { ListItemsTemplate } from '../../templates/ListItemsTemplate';
 import { Progress } from '../../components/Progress';
 import { GridFilters } from '../../components/GridFilters';
+import { MainPagination } from '../../components/MainPagination';
 
 export function Characters() {
-  const { characters, handleSetPage, handleSetName, handleSetStatus, loading } =
-    useCharactersList();
+  const {
+    characters,
+    pages,
+    page,
+    handleSetPage,
+    handleSetName,
+    handleSetStatus,
+    loading,
+  } = useCharactersList();
 
   const [filterInputNameValue, setFilterInputNameValue] = useState('');
 
   const infoTagsFilter = {
     title: 'Status',
     options: ['All', 'Alive', 'Dead', 'Unknown'],
+  };
+
+  const handleChangePage = (_event, value) => {
+    handleSetPage(value);
   };
 
   return (
@@ -35,23 +47,31 @@ export function Characters() {
         {loading ? (
           <Progress />
         ) : (
-          <GridCardList>
-            {characters &&
-              characters.map((character) => {
-                return (
-                  <CharacterCard
-                    key={character.id}
-                    avatar={character.image}
-                    id={character.id}
-                    name={character.name}
-                    status={character.status}
-                    species={character.species}
-                    lastKnownLocationUrl={character.location.url}
-                    firstSeenInUrl={character.episode[0]}
-                  />
-                );
-              })}
-          </GridCardList>
+          <>
+            <GridCardList>
+              {characters &&
+                characters.map((character) => {
+                  return (
+                    <CharacterCard
+                      key={character.id}
+                      avatar={character.image}
+                      id={character.id}
+                      name={character.name}
+                      status={character.status}
+                      species={character.species}
+                      lastKnownLocationUrl={character.location.url}
+                      firstSeenInUrl={character.episode[0]}
+                    />
+                  );
+                })}
+            </GridCardList>
+            <MainPagination
+              pages={pages}
+              page={page}
+              shape="rounded"
+              handleChangePage={handleChangePage}
+            />
+          </>
         )}
       </ListItemsTemplate>
     </MainTemplate>

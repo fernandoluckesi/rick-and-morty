@@ -4,7 +4,7 @@ import { getCharactersList } from '../services/apis';
 export function useCharactersList() {
   const [items, setItems] = useState([]);
 
-  const [page, setPage] = useState('');
+  const [page, setPage] = useState(1);
   const [name, setName] = useState('');
   const [status, setStatus] = useState('');
 
@@ -12,9 +12,11 @@ export function useCharactersList() {
     setPage(page);
   };
   const handleSetName = (name) => {
+    setPage(1);
     setName(name);
   };
   const handleSetStatus = (status) => {
+    setPage(1);
     if (status === 'All') {
       setStatus('');
     } else {
@@ -44,6 +46,7 @@ export function useCharactersList() {
     pages: items?.info?.pages,
     prevPage: items?.info?.prev,
     characters: items?.results,
+    page,
     handleSetPage,
     handleSetName,
     handleSetStatus,

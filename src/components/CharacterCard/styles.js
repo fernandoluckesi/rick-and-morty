@@ -20,6 +20,7 @@ export const Avatar = styled.div`
   }
   height: 210px;
   width: 210px;
+
   img {
     border-radius: 10px 0 0 10px;
     height: 210px;
@@ -28,6 +29,8 @@ export const Avatar = styled.div`
 
   @media (max-width: 1000px) {
     height: 150px;
+    width: 150px;
+
     img {
       height: 150px;
       width: 150px;
@@ -36,6 +39,8 @@ export const Avatar = styled.div`
 
   @media (max-width: 700px) {
     height: 100px;
+    width: 100px;
+
     img {
       height: 100px;
       width: 100px;

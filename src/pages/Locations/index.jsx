@@ -1,30 +1,25 @@
 import React from 'react';
-import { CharacterCard } from '../../components/CharacterCard';
 import { FilterInput } from '../../components/FilterInput';
-import { FilterTags } from '../../components/FilterTags';
 import { GridCardList } from '../../components/GridCardList';
-import { useCharactersList } from '../../hooks/useCharactersList';
 import { MainTemplate } from '../../templates/MainTemplate';
 import { ListItemsTemplate } from '../../templates/ListItemsTemplate';
 import { Progress } from '../../components/Progress';
 import { GridFilters } from '../../components/GridFilters';
 import { MainPagination } from '../../components/MainPagination';
+import { useLocationsList } from '../../hooks/useLocationsList';
+import { LocationCard } from '../../components/LocationCard';
 
-export function Characters() {
+export function Locations() {
   const {
-    characters,
+    locations,
     pages,
     page,
     handleSetPage,
     handleSetName,
-    handleSetStatus,
+    handleSetType,
+    handleSetDimension,
     loading,
-  } = useCharactersList();
-
-  const infoTagsFilter = {
-    title: 'Status',
-    options: ['All', 'Alive', 'Dead', 'Unknown'],
-  };
+  } = useLocationsList();
 
   const handleChangePage = (_event, value) => {
     handleSetPage(value);
@@ -32,33 +27,38 @@ export function Characters() {
 
   return (
     <MainTemplate>
-      <ListItemsTemplate title={'Characters'}>
+      <ListItemsTemplate title={'Locations'}>
         <GridFilters>
-          <FilterInput placeholder="Search name..." setValue={handleSetName} />
-          <FilterTags infoTags={infoTagsFilter} setValue={handleSetStatus} />
+          <FilterInput
+            placeholder="Search name location..."
+            setValue={handleSetName}
+          />
+          <FilterInput placeholder="Search type..." setValue={handleSetType} />
+          <FilterInput
+            placeholder="Search dimension..."
+            setValue={handleSetDimension}
+          />
         </GridFilters>
         {loading ? (
           <Progress />
         ) : (
           <>
             <GridCardList>
-              {characters &&
-                characters.map((character) => {
+              {locations &&
+                locations.map((location) => {
                   return (
-                    <CharacterCard
-                      key={character.id}
-                      avatar={character.image}
-                      id={character.id}
-                      name={character.name}
-                      status={character.status}
-                      species={character.species}
-                      lastKnownLocationUrl={character.location.url}
-                      firstSeenInUrl={character.episode[0]}
+                    <LocationCard
+                      key={location.id}
+                      id={location.id}
+                      name={location.name}
+                      type={location.type}
+                      dimension={location.dimension}
+                      residentsUrls={location.residents}
                     />
                   );
                 })}
             </GridCardList>
-            {characters && (
+            {locations && (
               <MainPagination
                 pages={pages}
                 page={page}

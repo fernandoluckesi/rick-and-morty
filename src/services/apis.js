@@ -45,3 +45,29 @@ export const getCharactersList = (page, name, status) => {
       return error;
     });
 };
+
+export const getLocationsList = (page, name, type, dimension) => {
+  return axios
+    .get(
+      `https://rickandmortyapi.com/api/location/?page=${page}&name=${name}&type=${type}&dimension=${dimension}`
+    )
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return error;
+    });
+};
+
+export const getEpisodesList = (page, name, episode) => {
+  return axios
+    .get(
+      `https://rickandmortyapi.com/api/episode/?page=${page}&name=${name}&episode=${episode}`
+    )
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return error;
+    });
+};

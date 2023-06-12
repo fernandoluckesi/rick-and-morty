@@ -3,7 +3,7 @@
 - [Título e Logo](#título-e-logo)
 - [Objetivo do projeto](#objetivo-do-projeto)
 - [Tecnologias utilizadas](#tecnologias-utilizadas)
-- [Como rodar o projeto](#como-rodar-o-projeto)
+- [Como rodar o projeto localmente](#como-rodar-o-projeto-localmente)
 
 # Título e Logo
 

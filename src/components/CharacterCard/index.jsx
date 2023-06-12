@@ -38,7 +38,7 @@ export function CharacterCard({
   };
 
   return (
-    <MainContainer>
+    <MainContainer data-testid="character-card">
       <Avatar onClick={handleCharacterDetailsRedirect}>
         <img src={avatar} alt={name} />
       </Avatar>

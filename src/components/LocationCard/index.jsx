@@ -30,7 +30,10 @@ export function LocationCard({ id, name, type, dimension, residentsUrls }) {
   }, []);
 
   return (
-    <MainContainer onClick={handleEpisodeDetailsRedirect}>
+    <MainContainer
+      onClick={handleEpisodeDetailsRedirect}
+      data-testid="location-card"
+    >
       <Name to={`/location/${id}`}>{name}</Name>
       <Info>
         <h4>Type:&ensp;</h4>

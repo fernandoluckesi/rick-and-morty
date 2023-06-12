@@ -6,9 +6,7 @@ export function useItems(category) {
 
   useEffect(() => {
     getAllItemsByCategory(category)
-      .then((data) => {
-        setItems(data);
-      })
+      .then((data) => setItems(data))
       .catch(() => {
         setItems([]);
       });

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const getAllItemsByCategory = (category) => {
+/* export const getAllItemsByCategory = (category) => {
   return axios
     .get(`https://rickandmortyapi.com/api/${category}`)
     .then((response) => {
@@ -9,6 +9,17 @@ export const getAllItemsByCategory = (category) => {
     .catch((error) => {
       return error;
     });
+}; */
+
+export const getAllItemsByCategory = async (category) => {
+  try {
+    const response = await axios.get(
+      `https://rickandmortyapi.com/api/${category}`
+    );
+    return response.data.results;
+  } catch (error) {
+    return error;
+  }
 };
 
 export const getByUrl = (url) => {

@@ -4,8 +4,9 @@ import { Home } from './pages/Home';
 import { Characters } from './pages/Characters';
 import { Locations } from './pages/Locations';
 import { Episodes } from './pages/Episodes';
+import { About } from './pages/About';
 
-function App() {
+export function Router() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
@@ -13,8 +14,7 @@ function App() {
       <Route path="/characters" element={<Characters />} />
       <Route path="/locations" element={<Locations />} />
       <Route path="/episodes" element={<Episodes />} />
+      <Route path="/about" element={<About />} />
     </Routes>
   );
 }
-
-export default App;

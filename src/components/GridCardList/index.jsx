@@ -5,7 +5,3 @@ import { Grid } from './styles';
 export function GridCardList({ children }) {
   return <Grid>{children}</Grid>;
 }
-
-GridCardList.propTypes = {
-  children: PropTypes.element,
-};

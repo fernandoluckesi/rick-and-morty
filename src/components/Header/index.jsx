@@ -46,16 +46,24 @@ export function Header() {
           <Links $drawerTransition={drawerTransition}>
             <CloseBtn src={CloseIcon} onClick={handleCloseDrawer} />
             <li>
-              <Link to="/characters">Characters</Link>
+              <Link to="/characters" data-testid="link-navigate-characters">
+                Characters
+              </Link>
             </li>
             <li>
-              <Link to="/episodes">Episodes</Link>
+              <Link to="/episodes" data-testid="link-navigate-episodes">
+                Episodes
+              </Link>
             </li>
             <li>
-              <Link to="/locations">Locations</Link>
+              <Link to="/locations" data-testid="link-navigate-locations">
+                Locations
+              </Link>
             </li>
             <li>
-              <Link to="/about">About</Link>
+              <Link to="/about" data-testid="link-navigate-about">
+                About
+              </Link>
             </li>
           </Links>
         )}

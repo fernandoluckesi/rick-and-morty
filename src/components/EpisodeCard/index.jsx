@@ -30,7 +30,10 @@ export function EpisodeCard({ id, name, airDate, episode, charactersUrls }) {
   }, []);
 
   return (
-    <MainContainer onClick={handleEpisodeDetailsRedirect}>
+    <MainContainer
+      onClick={handleEpisodeDetailsRedirect}
+      data-testid="episode-card"
+    >
       <Name to={`/episode/${id}`}>{name}</Name>
       <Info>
         <h4>Episode:&ensp;</h4>

@@ -1,4 +1,6 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { MainTemplate } from '../../templates/MainTemplate';
 import {
   Banner,
@@ -15,12 +17,13 @@ import { useItems } from '../../hooks/useItems';
 import { GridCardList } from '../../components/GridCardList';
 
 export function Home() {
+  const navigate = useNavigate();
   const characters = useItems('character');
   const locations = useItems('location');
   const episodes = useItems('episode');
 
   const handleRedirectPageAllItems = (category) => {
-    window.location.href = `/${category}`;
+    navigate(`/${category}`);
   };
 
   return (
@@ -70,6 +73,7 @@ export function Home() {
             </GridCardList>
             <ViewMoreBtn
               onClick={() => handleRedirectPageAllItems('characters')}
+              data-testid="view-more-characters-btn"
             >
               VIEW MORE CHARACTERS
             </ViewMoreBtn>
@@ -91,7 +95,10 @@ export function Home() {
                   );
                 })}
             </GridCardList>
-            <ViewMoreBtn onClick={() => handleRedirectPageAllItems('episodes')}>
+            <ViewMoreBtn
+              onClick={() => handleRedirectPageAllItems('episodes')}
+              data-testid="view-more-episodes-btn"
+            >
               VIEW MORE EPISODES
             </ViewMoreBtn>
           </CardListContainer>
@@ -114,6 +121,7 @@ export function Home() {
             </GridCardList>
             <ViewMoreBtn
               onClick={() => handleRedirectPageAllItems('locations')}
+              data-testid="view-more-locations-btn"
             >
               VIEW MORE LOCATIONS
             </ViewMoreBtn>

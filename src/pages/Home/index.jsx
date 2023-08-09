@@ -31,8 +31,8 @@ export function Home() {
       <>
         <Banner>
           <p>
-            Does this site exist or not? Are you alive or dead? Are you unsure
-            of that, Heisenberg?
+            this site exist or not? Are you alive or dead? Are you unsure of
+            that, Heisenberg?
           </p>
         </Banner>
         <ContentContainer>
